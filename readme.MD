@@ -1,0 +1,2 @@
+This is my first project of the Harvard's CS50AI course. The name of this project is "Degrees". 
+This is a graph related project where I will use BFS to find shortest path between two actors through movies.
