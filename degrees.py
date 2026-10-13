@@ -84,6 +84,15 @@ def main():
             print(f"{i + 1}: {person1} and {person2} starred in {movie}")
 
 
+def construct_path(current):
+    path = []
+    while(current.parent is not None):
+        path.append((current.action,current.state))
+        current = current.parent
+    path.reverse()
+    return path
+
+
 def shortest_path(source, target):
     """
     Returns the shortest list of (movie_id, person_id) pairs
@@ -96,10 +105,11 @@ def shortest_path(source, target):
     frontier.add(startNode)
     explored = set()
 
-    while(True):
+    while(not frontier.empty()):
         current = frontier.remove()
         if(current.state == target):
-            pass
+            path = construct_path(current)
+            return path
         
         explored.add(current.state)
         neighbors = neighbors_for_person(current.state)
@@ -108,9 +118,7 @@ def shortest_path(source, target):
                 child = Node(person_id,current,movie_id)
                 frontier.add(child)
 
-
-    
-    
+    return None
 
 
 def person_id_for_name(name):
